@@ -32,6 +32,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('notify:lunch')
             ->cron('35 11 * * 1-5'); // 11h35 from Monday to Friday
+
+        $schedule->command('notify:checkout')
+            ->cron('00 17 * * 1-5'); // 17h from Monday to Friday
     }
 
     /**
