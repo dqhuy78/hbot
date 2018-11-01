@@ -42,15 +42,21 @@ class ForecastWeatherDaily extends Command
     public function handle()
     {
         try {
-            // Get weather
+            // Get daily weather
             $weatherApi = new OpenWeatherMap(env('OPEN_WEATHER_API_KEY'));
             $forecastWeather = $weatherApi->getRawHourlyForecastData('Hanoi', 'metric', 'vi', '', 'json');
             $forecastWeather = $this->extractTodayWeather($forecastWeather);
 
+            // Get current weather
+            $weather = $weatherApi->getWeather('Hanoi', 'metric', 'vi');
+            $currentWeather = $this->extractCurrentWeather($weather);
+
+
+
             // Send message
             ChatworkSDK::setApiKey(env('CHATWORK_API_KEY'));
             $room = new ChatworkRoom(env('TEAM_AN_TRUA_FS'));
-            $room->sendMessage($this->constructMessage($forecastWeather));
+            $room->sendMessage($this->constructMessage($forecastWeather, $currentWeather));
         } catch (\Exception $e) {
             logger($e);
         }
@@ -86,16 +92,32 @@ class ForecastWeatherDaily extends Command
     }
 
     /**
+     * Extract data for only current weather
+     *
+     * @param json $weathers
+     *
+     * @return array
+     */
+    protected function extractCurrentWeather($weather)
+    {
+        return [
+            'temperature' => $weather->temperature->getValue(),
+            'desc' => ucfirst(strtolower($weather->clouds->getDescription())),
+        ];
+    }
+
+    /**
      * Construct response message for chatwork
      *
      * @param array $forecastWeather
      *
      * @return string
      */
-    protected function constructMessage($forecastWeather)
+    protected function constructMessage($today, $current)
     {
         return '[toall] Dự báo thời tiết ngày ' . Carbon::today()->format('d/m/Y') . ':' . PHP_EOL
-            . '- Nhiệt độ: ' . $forecastWeather['min_temp'] . ' đến ' . $forecastWeather['max_temp'] . ' độ C' . PHP_EOL
-            . '- Thời tiết: ' . $forecastWeather['desc'];
+            . '- Nhiệt độ hiện tại: ' . $current['temperature'] . ' độ C - ' . $current['desc'] . PHP_EOL
+            . '- Nhiệt độ trong ngày: ' . $today['min_temp'] . ' đến ' . $today['max_temp'] . ' độ C' . PHP_EOL
+            . '- Thời tiết: ' . $today['desc'];
     }
 }
