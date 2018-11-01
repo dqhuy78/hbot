@@ -9,5 +9,7 @@ class KickService extends Service
     protected $option = [
         '(songphi)',
         '(songphi2)',
+        '(sucvat)',
+        '(xien)',
     ];
 }

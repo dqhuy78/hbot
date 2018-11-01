@@ -16,5 +16,8 @@ class SlapService extends Service
         '(tat7)',
         '(tat8)',
         '(2tat)',
+        '(sucvat)',
+        '(phonglon)',
+        '(xien)',
     ];
 }

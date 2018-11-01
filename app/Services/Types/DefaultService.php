@@ -7,19 +7,19 @@ use App\Services\Types\Service;
 class DefaultService extends Service
 {
     protected $option = [
-        '(?)',
-        '(??)',
-        '(dunno)',
+        '(ha??)',
         '(???)',
         '(seriously?)',
-        '(what?)',
         '(problem?)',
-        '(wow)',
         '(yeah)',
-        '(wtf2)',
-        '(idontknow)',
         '(idontcare)',
         '(cuoituthien)',
         '(doanxem)',
+        '(khinhbi2)',
+        '(khoamom)',
+        '(what)',
+        '(khenh)',
+        '(nom)',
+        '(gaidit)',
     ];
 }

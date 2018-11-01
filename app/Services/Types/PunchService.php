@@ -11,5 +11,7 @@ class PunchService extends Service
         '(dam2)',
         '(dam4)',
         '(dam5)',
+        '(sucvat)',
+        '(phonglon)',
     ];
 }
