@@ -15,7 +15,7 @@ class MapService
 
         return "[rp aid=$userId to=$roomId-$messId]\n"
             . 'Keangnam Office Map:' . PHP_EOL
-            . ' - Fizz: https://goo.gl/OZpKsp' . PHP_EOL
-            . ' - Buzz: https://goo.gl/5aTpMX' . PHP_EOL;
+            . ' - 13F (Fizz + Buzz): https://goo.gl/tv3Gz5' . PHP_EOL
+            . ' - 18F: https://goo.gl/U5FwQw' . PHP_EOL;
     }
 }
