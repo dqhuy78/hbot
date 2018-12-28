@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Services\Types;
+namespace App\Services\Types\Target;
 
-class SlapperService extends AdminService
+use App\Services\Types\Target\AbstractTargetService;
+
+class SlapTargetService extends AbstractTargetService
 {
     protected $emo = [
         '(songphi2)',
@@ -21,16 +23,14 @@ class SlapperService extends AdminService
     public function createResponse($data)
     {
         extract($data);
-        $targetUserId = $this->extractUserId($msg);
+        $targetUserId = $this->extractTargetId($msg);
 
         if (!$targetUserId) {
             return '[To:' . $fromId . ']' . PHP_EOL
                 . ' (kidding?)';
         }
 
-        if ($targetUserId != env('ADMIN_CW_ID')
-            && $targetUserId != env('HBOT_CW_ID')
-        ) {
+        if (!$this->exceptTarget($targetUserId)) {
             $emotionNo1 = $this->emo[array_rand($this->emo)];
             $emotionNo2 = $this->emo[array_rand($this->emo)];
             $emotionNo3 = $this->emo[array_rand($this->emo)];
@@ -40,9 +40,7 @@ class SlapperService extends AdminService
                 . PHP_EOL
                 . $emotionNo1 . ' ' . $emotionNo2 . ' ' . $emotionNo3;
         } else {
-            return '[To:' . $fromId . ']' . PHP_EOL
-                . ' (nonono)' . PHP_EOL
-                . ' (tat2)';
+            return $this->getCounterResponse($fromId);
         }
     }
 }

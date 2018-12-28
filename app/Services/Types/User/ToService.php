@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Services\Types;
+namespace App\Services\Types\User;
+
+use App\Services\Types\ServiceAuthorization;
 
 class ToService
 {
+    use ServiceAuthorization;
+
     /**
      * Create response message for weather service
      */
@@ -12,10 +16,7 @@ class ToService
         extract($data);
         $content = $this->extractContent($msg);
 
-        if ($fromId == env('ADMIN_CW_ID')
-            || $fromId == env('SUB_ADMIN_CW_ID')
-        ) {
-            logger($msg);
+        if ($this->authorize($fromId)) {
             return $content;
         } else {
             return '[To:' . $fromId . ']' . PHP_EOL

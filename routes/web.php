@@ -14,5 +14,5 @@
 Route::get('/', function() {
     return view('welcome');
 });
-Route::post('webhook/chatwork', 'WebhookController@handleEvent');
+Route::post('webhook/chatwork', 'ChatworkHookController@handleEvent');
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

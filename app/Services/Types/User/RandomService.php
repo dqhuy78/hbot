@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Services\Types;
+namespace App\Services\Types\User;
 
 use App\Models\User;
-use wataridori\ChatworkSDK\ChatworkSDK;
-use wataridori\ChatworkSDK\ChatworkRoom;
-use Carbon\Carbon;
+use App\Services\Types\ServiceAuthorization;
 
-class PermissionService
+class RandomService
 {
+    use ServiceAuthorization;
+
     /**
      * Create response message for permission service
      */
     public function createResponse($data)
     {
         extract($data);
-        if ($fromId != env('ADMIN_CW_ID')) {
+        if (!$this->authorize($fromId)) {
             return '[To:' . $fromId . ']' . PHP_EOL
                 . ' (nonono)';
         }
@@ -26,13 +26,18 @@ class PermissionService
         return $msg;
     }
 
+    /**
+     * Choose a random user's account id from database
+     *
+     * @return int
+     */
     private function chooseRandomMember()
     {
         $members = User::where([
             ['role', 'member'],
             ['priority', '>', '0'],
         ])
-        ->get();
+            ->get();
         $random = $this->transformMemberData($members);
         shuffle($random);
         $choosenMemberAccId = $random[array_rand($random)];
@@ -40,6 +45,13 @@ class PermissionService
         return $choosenMemberAccId;
     }
 
+    /**
+     * Generate random account id array from member list
+     *
+     * @param array $members
+     *
+     * @return array
+     */
     private function transformMemberData($members)
     {
         $random = [];
@@ -55,9 +67,16 @@ class PermissionService
         return $random;
     }
 
+    /**
+     * Generate response message
+     *
+     * @param int $memberId
+     *
+     * @return string
+     */
     private function sendCongratulations($memberId)
     {
         return '[To:' . $memberId . '] ' . PHP_EOL
-            . 'Chúc mừng bạn đã quay vào ô mất lượt (tangqua)';
+            . 'Chúc mừng bạn đã là người may mắn được lựa chọn (tangqua)';
     }
 }

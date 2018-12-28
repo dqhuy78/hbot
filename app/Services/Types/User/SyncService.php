@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Services\Types;
+namespace App\Services\Types\User;
 
-use wataridori\ChatworkSDK\ChatworkSDK;
-use wataridori\ChatworkSDK\ChatworkRoom;
 use App\Models\User;
+use App\Services\Types\ServiceAuthorization;
+use wataridori\ChatworkSDK\ChatworkRoom;
+use wataridori\ChatworkSDK\ChatworkSDK;
 
 class SyncService
 {
+    use ServiceAuthorization;
+
     /**
      * Create response message for weather service
      */
     public function createResponse($data)
     {
         extract($data);
-        if ($fromId != env('ADMIN_CW_ID')) {
+        if (!$this->authorize($fromId)) {
             return '[To:' . $fromId . ']' . PHP_EOL
                 . ' (nonono)';
         }
@@ -126,8 +129,8 @@ class SyncService
     {
         if (count($newUsers)) {
             return '[To:' . env('ADMIN_CW_ID') . ']' . PHP_EOL
-                . 'Sync member complete! ' . count($newUsers) . ' new members found:' . PHP_EOL
-                . $this->transformUserToString($newUsers);
+            . 'Sync member complete! ' . count($newUsers) . ' new members found:' . PHP_EOL
+            . $this->transformUserToString($newUsers);
         } else {
             return '[To:' . env('ADMIN_CW_ID') . ']' . PHP_EOL
                 . 'Sync member complete! No new member found.';

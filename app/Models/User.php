@@ -26,4 +26,14 @@ class User extends Model
         'priority',
         'last_read_only_time',
     ];
+
+    /**
+     * Check if current user is admin
+     *
+     * @return boolen
+     */
+    public function isAdmin()
+    {
+        return $this->role == 'admin';
+    }
 }

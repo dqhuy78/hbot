@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Types;
+namespace App\Services\Types\Emo;
 
-abstract class Service
+abstract class AbstractEmoService
 {
     /**
      * Optional emotion
@@ -21,6 +21,6 @@ abstract class Service
         $emotion = $this->option[array_rand($this->option)];
         extract($data);
 
-        return "[rp aid=$userId to=$roomId-$messId]\n $emotion";
+        return "[rp aid=$fromId to=$roomId-$msgId]\n $emotion";
     }
 }

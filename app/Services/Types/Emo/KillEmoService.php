@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Types;
+namespace App\Services\Types\Emo;
 
-use App\Services\Types\Service;
+use App\Services\Types\Emo\AbstractEmoService;
 
-class KillService extends Service
+class KillEmoService extends AbstractEmoService
 {
     protected $option = [
         '(sohai3)',

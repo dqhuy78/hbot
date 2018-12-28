@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Services\Types;
+namespace App\Services\Types\Command\Map;
 
-use Cmfcmf\OpenWeatherMap;
-
-class MapService
+class MapCommandService
 {
     /**
      * Create response message for weather service
      */
-    public function createResponse($data)
+    public function createResponse(array $data)
     {
         extract($data);
 
-        return "[rp aid=$userId to=$roomId-$messId]\n"
+        return "[rp aid=$fromId to=$roomId-$msgId]\n"
             . 'Keangnam Office Map:' . PHP_EOL
             . ' - 13F (Fizz + Buzz): https://goo.gl/tv3Gz5' . PHP_EOL
             . ' - 18F: https://goo.gl/U5FwQw' . PHP_EOL;

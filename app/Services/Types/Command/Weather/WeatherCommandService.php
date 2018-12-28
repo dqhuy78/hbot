@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Types;
+namespace App\Services\Types\Command\Weather;
 
 use Cmfcmf\OpenWeatherMap;
 
-class WeatherService
+class WeatherCommandService
 {
     /**
      * Create response message for weather service
@@ -15,7 +15,7 @@ class WeatherService
         extract($weather);
         extract($data);
 
-        return "[rp aid=$userId to=$roomId-$messId]\n"
+        return "[rp aid=$fromId to=$roomId-$msgId]\n"
             . "Nhiệt độ hiện tại: $temperature độ C - $desc";
     }
 
