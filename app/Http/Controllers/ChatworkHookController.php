@@ -77,6 +77,9 @@ class ChatworkHookController extends Controller
         // Generate message
         $response = ServiceEntry::service($service)
             ->createResponse($data);
+        if ($service == '\App\Services\Types\User\ToService') {
+            $data['roomId'] = env('TEAM_AN_TRUA_FS');
+        }
 
         // Send message
         $this->sendResponse($response, $data['roomId']);
