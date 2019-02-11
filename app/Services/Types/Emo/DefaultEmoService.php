@@ -7,7 +7,7 @@ use App\Services\Types\Emo\AbstractEmoService;
 class DefaultEmoService extends AbstractEmoService
 {
     protected $option = [
-        ':doge:',
+        '(occho)',
         '(yeah)',
         '(idontcare)',
         '(doanxem)',
@@ -15,12 +15,11 @@ class DefaultEmoService extends AbstractEmoService
         '(khoamom)',
         '(what)',
         '(quyxuong)',
-        '(huh?)',
+        '(occho)',
         '(hmm)',
         '(duocday)',
-        '(culua2) ?',
         '(gavin-clgt)',
-        '(hocmau2)',
-        '(luom2) ',
+        '(luom2)',
+        '(occho)',
     ];
 }
