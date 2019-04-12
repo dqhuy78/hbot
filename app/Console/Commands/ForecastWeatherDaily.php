@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Cmfcmf\OpenWeatherMap;
 use Carbon\Carbon;
-use wataridori\ChatworkSDK\ChatworkSDK;
+use GuzzleHttp\Client;
+use Illuminate\Console\Command;
 use wataridori\ChatworkSDK\ChatworkRoom;
+use wataridori\ChatworkSDK\ChatworkSDK;
 
 class ForecastWeatherDaily extends Command
 {
@@ -43,9 +43,17 @@ class ForecastWeatherDaily extends Command
     {
         try {
             // Get weather
-            $weatherApi = new OpenWeatherMap(env('OPEN_WEATHER_API_KEY'));
-            $forecastWeather = $weatherApi->getRawHourlyForecastData('Hanoi', 'metric', 'vi', '', 'json');
-            $forecastWeather = $this->extractTodayWeather($forecastWeather);
+            $apiUrl = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/353412';
+            $client = new Client;
+            $response = $client->request('GET', $apiUrl, [
+                'query' => [
+                    'language' => 'vi',
+                    'apikey' => env('ACCU_WEAHTER_API_KEY'),
+                    'metric' => 'true',
+                ],
+            ]);
+            $content = json_decode($response->getBody()->getContents());
+            $forecastWeather = $this->extractTodayWeather($content);
 
             // Send message
             ChatworkSDK::setApiKey(env('CHATWORK_API_KEY'));
@@ -65,24 +73,24 @@ class ForecastWeatherDaily extends Command
      */
     protected function extractTodayWeather($weathers)
     {
-        $result = [];
-        $weathers = json_decode($weathers, true);
-        foreach ($weathers['list'] as $weather) {
-            $day = Carbon::parse($weather['dt_txt']);
-            if ($day->isToday()) {
-                $result['min_temp'][] = $weather['main']['temp_min'];
-                $result['max_temp'][] = $weather['main']['temp_max'];
-                $result['desc'][] = $weather['weather'][0]['description'];
-            } else {
-                break;
+        $result = [
+            'min_temp' => 99,
+            'max_temp' => 0,
+            'desc' => [],
+        ];
+        foreach ($weathers as $weather) {
+            if ($result['min_temp'] > $weather->Temperature->Value) {
+                $result['min_temp'] = $weather->Temperature->Value;
             }
+            if ($result['max_temp'] < $weather->Temperature->Value) {
+                $result['max_temp'] = $weather->Temperature->Value;
+            }
+            $result['desc'][] = $weather->IconPhrase;
         }
 
-        return [
-            'min_temp' => round(min($result['min_temp']), 2),
-            'max_temp' => round(max($result['max_temp']), 2),
-            'desc' => implode(', ', array_unique($result['desc'])),
-        ];
+        $result['desc'] = implode(', ', array_unique($result['desc']));
+
+        return $result;
     }
 
     /**
@@ -96,6 +104,6 @@ class ForecastWeatherDaily extends Command
     {
         return '[toall] Dự báo thời tiết ngày ' . Carbon::today()->format('d/m/Y') . ':' . PHP_EOL
             . '- Nhiệt độ: ' . $forecastWeather['min_temp'] . ' đến ' . $forecastWeather['max_temp'] . ' độ C' . PHP_EOL
-            . '- Thời tiết: ' . $forecastWeather['desc'];
+            . '- Thời tiết trong 12h tới: ' . $forecastWeather['desc'];
     }
 }

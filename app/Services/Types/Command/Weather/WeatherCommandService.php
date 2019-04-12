@@ -3,6 +3,7 @@
 namespace App\Services\Types\Command\Weather;
 
 use Cmfcmf\OpenWeatherMap;
+use GuzzleHttp\Client;
 
 class WeatherCommandService
 {
@@ -11,31 +12,19 @@ class WeatherCommandService
      */
     public function createResponse($data)
     {
-        $weather = $this->getCurrentWeather();
-        extract($weather);
-        extract($data);
+        $apiUrl = 'http://dataservice.accuweather.com/currentconditions/v1/353412';
+        $client = new Client;
+        $response = $client->request('GET', $apiUrl, [
+            'query' => [
+                'language' => 'vi',
+                'apikey' => env('ACCU_WEAHTER_API_KEY'),
+            ],
+        ]);
+        $content = json_decode($response->getBody()->getContents())[0];
+        $temperature = $content->Temperature->Metric->Value;
+        $description = $content->WeatherText;
 
         return "[rp aid=$fromId to=$roomId-$msgId]\n"
-            . "Nhiệt độ hiện tại: $temperature độ C - $desc";
-    }
-
-    /**
-     * Get current time weather
-     *
-     * @return array
-     */
-    public function getCurrentWeather()
-    {
-        try {
-            $weatherApi = new OpenWeatherMap(env('OPEN_WEATHER_API_KEY'));
-            $weather = $weatherApi->getWeather('Hanoi', 'metric', 'vi');
-
-            return [
-                'temperature' => $weather->temperature->getValue(),
-                'desc' => ucfirst(strtolower($weather->clouds->getDescription())),
-            ];
-        } catch (\Exception $e) {
-            logger($e);
-        }
+            . "Nhiệt độ hiện tại: $temperature độ C - $description";
     }
 }
