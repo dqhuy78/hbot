@@ -32,6 +32,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('notify:lunch')
             ->cron('35 11 * * 1-5'); // 11h35 from Monday to Friday
+
+        $schedule->command('notify:cv-report')
+            ->cron('00 16 * * 1-5'); // 16h00 from Monday to Friday
     }
 
     /**
