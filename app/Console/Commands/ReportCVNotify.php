@@ -8,7 +8,7 @@ use wataridori\ChatworkSDK\ChatworkRoom;
 
 class ReportCVNotify extends Command
 {
-    protected $message = '[To:3501599] Đếm CV đi nào bạn êiiiii (goodduck)';
+    protected $message = '[To:3501599] Đếm CV đi nào bạn êiiiii (nhomnhom)';
 
     /**
      * The name and signature of the console command.
@@ -49,5 +49,6 @@ class ReportCVNotify extends Command
             logger($e);
             return false;
         }
+        logger('Message deliveried !');
     }
 }
