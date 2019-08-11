@@ -25,6 +25,6 @@ class WeatherCommandService
         $description = $content->WeatherText;
 
         return "[rp aid=$fromId to=$roomId-$msgId]\n"
-            . "Nhiệt độ hiện tại: $temperature độ C - $description";
+            . "Nhiệt độ Phúc Quốc hiện tại: $temperature độ C - $description";
     }
 }

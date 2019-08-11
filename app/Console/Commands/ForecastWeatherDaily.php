@@ -102,7 +102,7 @@ class ForecastWeatherDaily extends Command
      */
     protected function constructMessage($forecastWeather)
     {
-        return '[toall] Dự báo thời tiết ngày ' . Carbon::today()->format('d/m/Y') . ':' . PHP_EOL
+        return '[toall] Dự báo thời tiết Phúc Quốc ngày ' . Carbon::today()->format('d/m/Y') . ':' . PHP_EOL
             . '- Nhiệt độ: ' . $forecastWeather['min_temp'] . ' đến ' . $forecastWeather['max_temp'] . ' độ C' . PHP_EOL
             . '- Thời tiết trong 12h tới: ' . $forecastWeather['desc'];
     }
