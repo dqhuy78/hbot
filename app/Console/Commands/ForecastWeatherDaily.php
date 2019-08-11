@@ -43,7 +43,7 @@ class ForecastWeatherDaily extends Command
     {
         try {
             // Get weather
-            $apiUrl = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/353412';
+            $apiUrl = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/354237';
             $client = new Client;
             $response = $client->request('GET', $apiUrl, [
                 'query' => [

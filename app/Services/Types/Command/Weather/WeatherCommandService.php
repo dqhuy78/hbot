@@ -12,7 +12,7 @@ class WeatherCommandService
      */
     public function createResponse($data)
     {
-        $apiUrl = 'http://dataservice.accuweather.com/currentconditions/v1/353412';
+        $apiUrl = 'http://dataservice.accuweather.com/currentconditions/v1/354237';
         $client = new Client;
         $response = $client->request('GET', $apiUrl, [
             'query' => [
