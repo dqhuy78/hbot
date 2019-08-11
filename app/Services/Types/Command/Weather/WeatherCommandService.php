@@ -12,19 +12,23 @@ class WeatherCommandService
      */
     public function createResponse($data)
     {
-        $apiUrl = 'http://dataservice.accuweather.com/currentconditions/v1/354237';
-        $client = new Client;
-        $response = $client->request('GET', $apiUrl, [
-            'query' => [
-                'language' => 'vi',
-                'apikey' => env('ACCU_WEAHTER_API_KEY'),
-            ],
-        ]);
-        $content = json_decode($response->getBody()->getContents())[0];
-        $temperature = $content->Temperature->Metric->Value;
-        $description = $content->WeatherText;
+        try {
+            $apiUrl = 'http://dataservice.accuweather.com/currentconditions/v1/354237';
+            $client = new Client;
+            $response = $client->request('GET', $apiUrl, [
+                'query' => [
+                    'language' => 'vi',
+                    'apikey' => env('ACCU_WEAHTER_API_KEY'),
+                ],
+            ]);
+            $content = json_decode($response->getBody()->getContents())[0];
+            $temperature = $content->Temperature->Metric->Value;
+            $description = $content->WeatherText;
 
-        return "[rp aid=$fromId to=$roomId-$msgId]\n"
-            . "Nhiệt độ Phúc Quốc hiện tại: $temperature độ C - $description";
+            return "[rp aid=$fromId to=$roomId-$msgId]\n"
+                . "Nhiệt độ Phúc Quốc hiện tại: $temperature độ C - $description";
+        } catch (\Exception $e) {
+            logger($e);
+        }
     }
 }
