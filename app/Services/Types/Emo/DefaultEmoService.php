@@ -18,7 +18,7 @@ class DefaultEmoService extends AbstractEmoService
         '(what)',
         '(quyxuong)',
         '(hmm)',
-        '(wtfduck3)',
+        '(wtduck3)',
         '(nice)',
         '(luom2)',
         '(thecoah2)',
