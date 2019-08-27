@@ -30,9 +30,7 @@ abstract class AbstractTargetService
      */
     protected function exceptTarget($accountId)
     {
-        $user = User::where('account_id', $accountId)->first();
-
-        return $user->isAdmin();
+        return in_array($accountId, [env('ADMIN_CW_ID'), env('HBOT_CW_ID'), env('SUB_ADMIN_CW_ID')]);
     }
 
     /**
