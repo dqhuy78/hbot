@@ -8,7 +8,6 @@ class DefaultEmoService extends AbstractEmoService
 {
     protected $option = [
         '(occho)',
-        '(yeah)',
         '(yolo)',
         '(mumat)',
         '(doanxem)',
@@ -20,9 +19,18 @@ class DefaultEmoService extends AbstractEmoService
         '(hmm)',
         '(wtduck3)',
         '(nice)',
-        '(luom2)',
         '(thecoah2)',
-        '(suynghi3)',
         '(honghot)',
+        '(coichungtao2)',
+        '(deododc)',
+        '(hoplyvl)',
+        '(khoctolen)',
+        '(lamsao2)',
+        '(maydiena)',
+        '(oe)',
+        '(thaiy)',
+        '(thaphuong)',
+        '(tranhra)',
+        '(yaoming2)',
     ];
 }

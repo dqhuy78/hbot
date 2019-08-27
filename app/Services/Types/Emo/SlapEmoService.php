@@ -19,5 +19,6 @@ class SlapEmoService extends AbstractEmoService
         '(sucvat)',
         '(phonglon)',
         '(xien)',
+        '(bopco)',
     ];
 }

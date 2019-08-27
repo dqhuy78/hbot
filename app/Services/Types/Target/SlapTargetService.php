@@ -7,14 +7,20 @@ use App\Services\Types\Target\AbstractTargetService;
 class SlapTargetService extends AbstractTargetService
 {
     protected $emo = [
-        '(songphi2)',
         '(sucvat)',
-        '(phonglon)',
         '(xien)',
         '(2tat)',
         '(tat2)',
         '(tat3)',
         '(tat4)',
+        '(bopco)',
+    ];
+
+    protected $intro = [
+        '(cakhiavuivl)',
+        '(choino)',
+        '(tranhra)',
+        '(laiday3)',
     ];
 
     /**
@@ -31,12 +37,13 @@ class SlapTargetService extends AbstractTargetService
         }
 
         if (!$this->exceptTarget($targetUserId)) {
+            $intro = $this->intro[array_rand($this->intro)];
             $emotionNo1 = $this->emo[array_rand($this->emo)];
             $emotionNo2 = $this->emo[array_rand($this->emo)];
             $emotionNo3 = $this->emo[array_rand($this->emo)];
 
             return '[To:' . $targetUserId . ']' . PHP_EOL
-                . '(laiday3) ' . PHP_EOL
+                . $intro . PHP_EOL
                 . PHP_EOL
                 . $emotionNo1 . ' ' . $emotionNo2 . ' ' . $emotionNo3;
         } else {

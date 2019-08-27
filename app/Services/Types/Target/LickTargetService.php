@@ -8,8 +8,10 @@ class LickTargetService extends AbstractTargetService
 {
     protected $emo = [
         '(liemmanhinh3)',
+        '(liemliemliem)',
         '(liemmanhinh5)',
         '(liemmanhinh6)',
+        '(liemliemliem)',
     ];
 
     /**
