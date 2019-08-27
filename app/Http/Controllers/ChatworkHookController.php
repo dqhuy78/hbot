@@ -10,8 +10,8 @@ use wataridori\ChatworkSDK\ChatworkSDK;
 class ChatworkHookController extends Controller
 {
     private $command = [
-        '{random}' => '\App\Services\Types\User\RandomService',
-        '{sync}' => '\App\Services\Types\User\SyncService',
+        // '{random}' => '\App\Services\Types\User\RandomService',
+        // '{sync}' => '\App\Services\Types\User\SyncService',
         '{msg:' => '\App\Services\Types\User\ToService',
         '{weather}' => '\App\Services\Types\Command\Weather\WeatherCommandService',
         '{map}' => '\App\Services\Types\Command\Map\MapCommandService',

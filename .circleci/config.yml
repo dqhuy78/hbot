@@ -61,7 +61,46 @@ jobs:
                 [/info]" \
                 "https://api.chatwork.com/v2/rooms/$CHATWORK_ROOM_ID/messages"
             fi
-
+  #Run deploy to Heroku
+  deploy-heroku:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy to Heroku
+          command: |
+            git config --global push.default current
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git
+      - run:
+          name: Sending notification
+          when: on_fail
+          command: |
+            if [[ true ]];  then
+              curl -X POST -H "X-ChatWorkToken: $CHATWORK_TOKEN" -d \
+                "body=[info][title]Deploy build $CIRCLE_BUILD_NUM - FAIL[/title]
+                Repo: $CIRCLE_PROJECT_REPONAME
+                Author: $CIRCLE_USERNAME
+                Branch: $CIRCLE_BRANCH
+                Build link: https://circleci.com/gh/dqhuy78/hbot/$CIRCLE_BUILD_NUM
+                [/info]" \
+                "https://api.chatwork.com/v2/rooms/$CHATWORK_ROOM_ID/messages"
+            fi
+      - run:
+          name: Sending notification
+          when: on_success
+          command: |
+            if [[ true ]];  then
+              curl -X POST -H "X-ChatWorkToken: $CHATWORK_TOKEN" -d \
+                "body=[To:2611547]
+                [info][title]Deploy build $CIRCLE_BUILD_NUM - SUCCESS[/title]
+                Repo: $CIRCLE_PROJECT_REPONAME
+                Author: $CIRCLE_USERNAME
+                Branch: $CIRCLE_BRANCH
+                Build link: https://circleci.com/gh/dqhuy78/hbot/$CIRCLE_BUILD_NUM
+                [/info]" \
+                "https://api.chatwork.com/v2/rooms/$CHATWORK_ROOM_ID/messages"
+            fi
   #Run deploy to digital ocean server
   deploy-vps:
     machine:
@@ -77,7 +116,7 @@ workflows:
   build-n-deploy:
     jobs:
       - build
-      - deploy-vps:
+      - deploy-heroku:
           requires:
             - build
           filters:
