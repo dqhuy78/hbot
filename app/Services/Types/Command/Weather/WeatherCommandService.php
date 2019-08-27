@@ -13,7 +13,7 @@ class WeatherCommandService
     public function createResponse($data)
     {
         try {
-            $apiUrl = 'http://dataservice.accuweather.com/currentconditions/v1/354237';
+            $apiUrl = 'http://dataservice.accuweather.com/currentconditions/v1/353412';
             $client = new Client;
             $response = $client->request('GET', $apiUrl, [
                 'query' => [
@@ -26,7 +26,7 @@ class WeatherCommandService
             $description = $content->WeatherText;
 
             return "[rp aid=$fromId to=$roomId-$msgId]\n"
-                . "Nhiệt độ Phúc Quốc hiện tại: $temperature độ C - $description";
+                . "Nhiệt độ hiện tại: $temperature độ C - $description";
         } catch (\Exception $e) {
             logger($e);
         }

@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('weather:today')
-            ->cron('00 06 * * 1-5'); // 6h00 from Monday to Friday
+        // $schedule->command('weather:today')
+        //     ->cron('00 06 * * 1-5'); // 6h00 from Monday to Friday
 
         $schedule->command('notify:prepare-lunch')
             ->cron('25 11 * * 1-5'); // 11h25 from Monday to Friday
