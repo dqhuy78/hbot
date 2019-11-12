@@ -24,14 +24,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('weather:today')
-        //     ->cron('00 06 * * 1-5'); // 6h00 from Monday to Friday
+        $schedule->command('weather:today')
+            ->cron('30 06 * * 1-5'); // 6h30 from Monday to Friday
 
         $schedule->command('notify:prepare-lunch')
-            ->cron('35 11 * * 1-5'); // 11h25 from Monday to Friday
+            ->cron('35 11 * * 1-5'); // 11h35 from Monday to Friday
 
         $schedule->command('notify:lunch')
-            ->cron('40 11 * * 1-5'); // 11h35 from Monday to Friday
+            ->cron('40 11 * * 1-5'); // 11h40 from Monday to Friday
 
         $schedule->command('notify:cv-report')
             ->cron('00 17 * * 1-5'); // 17h00 from Monday to Friday
