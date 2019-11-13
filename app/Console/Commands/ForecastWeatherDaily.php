@@ -102,13 +102,13 @@ class ForecastWeatherDaily extends Command
      */
     protected function constructMessage($forecastWeather)
     {
-        $dayLeft = (int) round((strtotime('2020-01-25') - time()) / (60 * 60 * 24));
+        $dayLeft = (int) round((strtotime('2019-12-24') - time()) / (60 * 60 * 24));
 
         return '[toall] Dự báo thời tiết ngày ' . Carbon::today()->format('d/m/Y') . ':' . PHP_EOL
             . '- Nhiệt độ: ' . $forecastWeather['min_temp'] . ' đến ' . $forecastWeather['max_temp'] . ' độ C' . PHP_EOL
             . '- Thời tiết trong 12h tới: ' . $forecastWeather['desc'] . PHP_EOL
             . '[info][title]Chỉ còn ' . $dayLeft
-            . ' ngày nữa là tết đến rồi m.n ơi'
-            . '[/title]Countdown page - Comming soon... (cracker)(cracker)(cracker)[/info]';
+            . ' ngày nữa là Noel đến rồi m.n ơi'
+            . '[/title]Countdown page - https://dqhuy78.github.io/countdown/ (cracker)(cracker)(cracker)[/info]';
     }
 }
