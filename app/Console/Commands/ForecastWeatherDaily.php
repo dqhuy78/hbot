@@ -102,7 +102,7 @@ class ForecastWeatherDaily extends Command
      */
     protected function constructMessage($forecastWeather)
     {
-        $dayLeft = (int) round((strtotime('2019-12-24') - time()) / (60 * 60 * 24));
+        $dayLeft = (int) round((strtotime('2020-12-24') - time()) / (60 * 60 * 24));
 
         return '[toall] Dự báo thời tiết ngày ' . Carbon::today()->format('d/m/Y') . ':' . PHP_EOL
             . '- Nhiệt độ: ' . $forecastWeather['min_temp'] . ' đến ' . $forecastWeather['max_temp'] . ' độ C' . PHP_EOL

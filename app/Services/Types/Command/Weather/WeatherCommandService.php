@@ -2,7 +2,6 @@
 
 namespace App\Services\Types\Command\Weather;
 
-use Cmfcmf\OpenWeatherMap;
 use GuzzleHttp\Client;
 
 class WeatherCommandService

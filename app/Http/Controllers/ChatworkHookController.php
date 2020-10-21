@@ -18,6 +18,7 @@ class ChatworkHookController extends Controller
         '{welcome:' => '\App\Services\Types\Target\WelcomeService',
         '{tát:' => '\App\Services\Types\Target\SlapTargetService',
         '{liếm:' => '\App\Services\Types\Target\LickTargetService',
+        '{noel}' => '\App\Services\Types\Command\Noel\NoelCommandService',
 
     ];
 
