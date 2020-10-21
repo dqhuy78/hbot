@@ -63,6 +63,8 @@ class ForecastWeatherDaily extends Command
             $room = new ChatworkRoom(env('TEAM_AN_TRUA_FS'));
             $room->sendMessage($this->constructMessage($forecastWeather));
         } catch (\Exception $e) {
+            logger($e->getLine());
+            logger($e->getMessage());
             logger($e);
         }
     }
