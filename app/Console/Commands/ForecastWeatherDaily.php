@@ -52,7 +52,7 @@ class ForecastWeatherDaily extends Command
                     'metric' => 'true',
                 ],
             ]);
-            $content = json_decode($response->getBody()->getContents());
+            $content = json_decode($response->getBody()->getContents(), true);
             $forecastWeather = $this->extractTodayWeather($content);
 
             // Send message
