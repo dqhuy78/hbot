@@ -53,6 +53,7 @@ class ForecastWeatherDaily extends Command
                 ],
             ]);
             $content = json_decode($response->getBody()->getContents(), true);
+            logger($content);
             $forecastWeather = $this->extractTodayWeather($content);
 
             // Send message
