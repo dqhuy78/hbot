@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: 7896/civ3-workspace:2.0
+      - image: framgiaciteam/laravel-workspace:7.3
     steps:
       - checkout
       - run:
