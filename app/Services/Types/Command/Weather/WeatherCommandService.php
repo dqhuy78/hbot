@@ -14,7 +14,7 @@ class WeatherCommandService
         try {
             extract($data);
             $apiUrl = 'http://dataservice.accuweather.com/currentconditions/v1/353412';
-            $client = new Client;
+            $client = new Client();
             $response = $client->request('GET', $apiUrl, [
                 'query' => [
                     'language' => 'vi',
@@ -25,8 +25,7 @@ class WeatherCommandService
             $temperature = $content->Temperature->Metric->Value;
             $description = $content->WeatherText;
 
-            return "[rp aid=$fromId to=$roomId-$msgId]\n"
-                . "Nhiệt độ hiện tại: $temperature độ C - $description";
+            return "[rp aid=$fromId to=$roomId-$msgId]\n"."Nhiệt độ hiện tại: $temperature độ C - $description";
         } catch (\Exception $e) {
             logger($e);
         }

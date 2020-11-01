@@ -18,8 +18,7 @@ class SyncService
     {
         extract($data);
         if (!$this->authorize($fromId)) {
-            return '[To:' . $fromId . ']' . PHP_EOL
-                . ' (nonono)';
+            return '[To:'.$fromId.']'.PHP_EOL.' (nonono)';
         }
 
         $members = $this->getMemberList();
@@ -38,9 +37,8 @@ class SyncService
     {
         ChatworkSDK::setApiKey(env('CHATWORK_API_KEY'));
         $room = new ChatworkRoom(env('TEAM_AN_TRUA_FS'));
-        $members = $room->getMembers();
 
-        return $members;
+        return $room->getMembers();
     }
 
     /**
@@ -75,9 +73,8 @@ class SyncService
         $usersAccId = array_column($users, 'account_id');
         $existsUsers = User::whereIn('account_id', $usersAccId)->get();
         $existsUsersAccId = $existsUsers->pluck('account_id')->all();
-        $newUsersAccId = array_diff($usersAccId, $existsUsersAccId);
 
-        return $newUsersAccId;
+        return array_diff($usersAccId, $existsUsersAccId);
     }
 
     /**
@@ -111,8 +108,7 @@ class SyncService
     {
         $result = '';
         foreach ($users as $user) {
-            $result .= '      [To:' . $user['account_id'] . '] '
-                . $user['name'] . PHP_EOL;
+            $result .= '      [To:'.$user['account_id'].'] '.$user['name'].PHP_EOL;
         }
 
         return $result;
@@ -128,12 +124,9 @@ class SyncService
     private function generateReport($newUsers)
     {
         if (count($newUsers)) {
-            return '[To:' . env('ADMIN_CW_ID') . ']' . PHP_EOL
-            . 'Sync member complete! ' . count($newUsers) . ' new members found:' . PHP_EOL
-            . $this->transformUserToString($newUsers);
-        } else {
-            return '[To:' . env('ADMIN_CW_ID') . ']' . PHP_EOL
-                . 'Sync member complete! No new member found.';
+            return '[To:'.env('ADMIN_CW_ID').']'.PHP_EOL.'Sync member complete! '.count($newUsers).' new members found:'.PHP_EOL.$this->transformUserToString($newUsers);
         }
+
+        return '[To:'.env('ADMIN_CW_ID').']'.PHP_EOL.'Sync member complete! No new member found.';
     }
 }

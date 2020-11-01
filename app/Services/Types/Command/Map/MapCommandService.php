@@ -11,9 +11,6 @@ class MapCommandService
     {
         extract($data);
 
-        return "[rp aid=$fromId to=$roomId-$msgId]\n"
-            . 'Keangnam Office Map:' . PHP_EOL
-            . ' - 13F (Fizz + Buzz): https://goo.gl/tv3Gz5' . PHP_EOL
-            . ' - 18F: https://goo.gl/U5FwQw' . PHP_EOL;
+        return "[rp aid=$fromId to=$roomId-$msgId]\n".'Keangnam Office Map:'.PHP_EOL.' - 13F (Fizz + Buzz): https://goo.gl/tv3Gz5'.PHP_EOL.' - 18F: https://goo.gl/U5FwQw'.PHP_EOL;
     }
 }

@@ -104,13 +104,15 @@ class ForecastWeatherDaily extends Command
      */
     protected function constructMessage($forecastWeather)
     {
-        $dayLeft = (int) round((strtotime('2020-12-24') - time()) / (60 * 60 * 24));
+        $dayLeftToNoel = (int) round((strtotime('2020-12-24') - time()) / (60 * 60 * 24));
+        $dayLeftToNewYear = (int) round((strtotime('2021-01-01') - time()) / (60 * 60 * 24));
+        $dayLeftToNewYear2 = (int) round((strtotime('2021-12-02') - time()) / (60 * 60 * 24));
 
         return '[toall] Dự báo thời tiết ngày ' . Carbon::today()->format('d/m/Y') . ':' . PHP_EOL
             . '- Nhiệt độ: ' . $forecastWeather['min_temp'] . ' đến ' . $forecastWeather['max_temp'] . ' độ C' . PHP_EOL
             . '- Thời tiết trong 12h tới: ' . $forecastWeather['desc'] . PHP_EOL
-            . '[info][title]Chỉ còn ' . $dayLeft
-            . ' ngày nữa là Noel đến rồi m.n ơi'
-            . '[/title]Countdown page - https://dqhuy78.github.io/countdown/ (cracker)(cracker)(cracker)[/info]';
+            . '[info]+ Còn ' . $dayLeftToNoel . ' ngày nữa là Noel'
+            . '+ Còn ' . $dayLeftToNewYear . ' ngày cho đến tết dương'
+            . '+ Và ' . $dayLeftToNewYear2 . ' ngày là tết âm lịch[/info]';
     }
 }

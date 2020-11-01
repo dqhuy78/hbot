@@ -2,8 +2,6 @@
 
 namespace App\Services\Types\Emo;
 
-use App\Services\Types\Emo\AbstractEmoService;
-
 class DefaultEmoService extends AbstractEmoService
 {
     protected $option = [

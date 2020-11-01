@@ -16,14 +16,12 @@ class RandomService
     {
         extract($data);
         if (!$this->authorize($fromId)) {
-            return '[To:' . $fromId . ']' . PHP_EOL
-                . ' (nonono)';
+            return '[To:'.$fromId.']'.PHP_EOL.' (nonono)';
         }
 
         $choosenMemberAccId = $this->chooseRandomMember();
-        $msg = $this->sendCongratulations($choosenMemberAccId);
 
-        return $msg;
+        return $this->sendCongratulations($choosenMemberAccId);
     }
 
     /**
@@ -40,9 +38,8 @@ class RandomService
             ->get();
         $random = $this->transformMemberData($members);
         shuffle($random);
-        $choosenMemberAccId = $random[array_rand($random)];
 
-        return $choosenMemberAccId;
+        return $random[array_rand($random)];
     }
 
     /**
@@ -56,7 +53,7 @@ class RandomService
     {
         $random = [];
         foreach ($members as $member) {
-            if ($member['priority'] == 1) {
+            if ($member['priority'] === 1) {
                 array_push($random, (int) $member['account_id']);
             } else {
                 $tmp = array_fill(0, (int) $member['priority'], (int) $member['account_id']);
@@ -76,7 +73,6 @@ class RandomService
      */
     private function sendCongratulations($memberId)
     {
-        return '[To:' . $memberId . '] ' . PHP_EOL
-            . 'Chúc mừng bạn đã là người may mắn được lựa chọn (tangqua)';
+        return '[To:'.$memberId.'] '.PHP_EOL.'Chúc mừng bạn đã là người may mắn được lựa chọn (tangqua)';
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use wataridori\ChatworkSDK\ChatworkSDK;
 use wataridori\ChatworkSDK\ChatworkRoom;
+use wataridori\ChatworkSDK\ChatworkSDK;
 
 class ReportCVNotify extends Command
 {
@@ -47,8 +47,10 @@ class ReportCVNotify extends Command
             $room->sendMessage($this->message);
         } catch (\Exception $e) {
             logger($e);
+
             return false;
         }
+
         logger('Message deliveried !');
     }
 }

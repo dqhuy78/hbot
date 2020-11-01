@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Running test
           command: |
-            framgia-ci run --local
+            composer test
       - run:
           name: Sending notification
           when: on_fail

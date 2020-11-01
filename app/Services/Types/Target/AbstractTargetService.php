@@ -2,8 +2,6 @@
 
 namespace App\Services\Types\Target;
 
-use App\Models\User;
-
 abstract class AbstractTargetService
 {
     /**
@@ -16,9 +14,8 @@ abstract class AbstractTargetService
     protected function extractTargetId($msg)
     {
         $msgSegment = explode(':', $msg);
-        $targetUserId = substr($msgSegment[2], 0, strpos($msgSegment[2], ']'));
 
-        return $targetUserId;
+        return substr($msgSegment[2], 0, strpos($msgSegment[2], ']'));
     }
 
     /**
@@ -26,7 +23,7 @@ abstract class AbstractTargetService
      *
      * @param int $accountId
      *
-     * @return boolean
+     * @return bool
      */
     protected function exceptTarget($accountId)
     {
@@ -42,8 +39,6 @@ abstract class AbstractTargetService
      */
     protected function getCounterResponse($fromId)
     {
-        return '[To:' . $fromId . ']' . PHP_EOL
-            . ' (nonono)' . PHP_EOL
-            . ' (tat2)(tat2)(tat2)';
+        return '[To:'.$fromId.']'.PHP_EOL.' (nonono)'.PHP_EOL.' (tat2)(tat2)(tat2)';
     }
 }

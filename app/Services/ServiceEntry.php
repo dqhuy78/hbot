@@ -23,8 +23,9 @@ class ServiceEntry
     public static function getService($service)
     {
         if (class_exists($service)) {
-            return new $service;
+            return new $service();
         }
-        return new \App\Services\Types\Emo\DefaultEmoService;
+
+        return new \App\Services\Types\Emo\DefaultEmoService();
     }
 }

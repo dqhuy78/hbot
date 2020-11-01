@@ -2,8 +2,6 @@
 
 namespace App\Services\Types\Emo;
 
-use App\Services\Types\Emo\AbstractEmoService;
-
 class KickEmoService extends AbstractEmoService
 {
     protected $option = [

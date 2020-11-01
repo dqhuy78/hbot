@@ -2,8 +2,6 @@
 
 namespace App\Services\Types;
 
-use App\Models\User;
-
 trait ServiceAuthorization
 {
     protected function authorize($accountId)

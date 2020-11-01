@@ -18,10 +18,9 @@ class ToService
 
         if ($this->authorize($fromId)) {
             return $content;
-        } else {
-            return '[To:' . $fromId . ']' . PHP_EOL
-                . ' (nonono)';
         }
+
+        return '[To:'.$fromId.']'.PHP_EOL.' (nonono)';
     }
 
     /**
