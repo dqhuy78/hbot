@@ -71,7 +71,7 @@ jobs:
           name: Deploy to Heroku
           command: |
             git config --global push.default current
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git -f
       - run:
           name: Sending notification
           when: on_fail
