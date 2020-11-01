@@ -70,12 +70,12 @@ class ForecastWeatherDaily extends Command
     {
         $dayLeftToNoel = (int) round((strtotime('2020-12-24') - time()) / (60 * 60 * 24));
         $dayLeftToNewYear = (int) round((strtotime('2021-01-01') - time()) / (60 * 60 * 24));
-        $dayLeftToNewYear2 = (int) round((strtotime('2021-12-02') - time()) / (60 * 60 * 24));
+        $dayLeftToNewYear2 = (int) round((strtotime('2021-02-12') - time()) / (60 * 60 * 24));
 
         return '[toall] Dự báo thời tiết ngày ' . Carbon::today()->format('d/m/Y') . ':' . PHP_EOL
             . '- Nhiệt độ: ' . $temperature . ' độ C, ' . $des . PHP_EOL
-            . '[info]+ Còn ' . $dayLeftToNoel . ' ngày nữa là Noel'
-            . '+ Còn ' . $dayLeftToNewYear . ' ngày cho đến tết dương'
+            . '[info]+ Còn ' . $dayLeftToNoel . ' ngày nữa là Noel' . PHP_EOL
+            . '+ Còn ' . $dayLeftToNewYear . ' ngày cho đến tết dương' . PHP_EOL
             . '+ Và ' . $dayLeftToNewYear2 . ' ngày là tết âm lịch[/info]';
     }
 }
