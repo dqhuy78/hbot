@@ -71,11 +71,33 @@ class ForecastWeatherDaily extends Command
         $dayLeftToNoel = (int) round((strtotime('2020-12-24') - time()) / (60 * 60 * 24));
         $dayLeftToNewYear = (int) round((strtotime('2021-01-01') - time()) / (60 * 60 * 24));
         $dayLeftToNewYear2 = (int) round((strtotime('2021-02-12') - time()) / (60 * 60 * 24));
+        $date = Carbon::today()->format('d/m/Y');
 
-        return '[toall] Dự báo thời tiết ngày ' . Carbon::today()->format('d/m/Y') . ':' . PHP_EOL
-            . '- Nhiệt độ: ' . $temperature . ' độ C, ' . $des . PHP_EOL
-            . '[info]+ Còn ' . $dayLeftToNoel . ' ngày nữa là Noel' . PHP_EOL
-            . '+ Còn ' . $dayLeftToNewYear . ' ngày cho đến tết dương' . PHP_EOL
-            . '+ Và ' . $dayLeftToNewYear2 . ' ngày là tết âm lịch[/info]';
+        return '[toall][title]Chào buổi sáng![/title]'
+            . '(*) Dự báo thời tiết ngày ' . $date . ': Nhiệt độ: ' . $temperature . ' độ C, ' . $des . PHP_EOL . PHP_EOL
+            . '(cracker) Còn ' . $dayLeftToNoel . ' ngày nữa là Noel (https://dqhuy78.github.io/countdown/)' . PHP_EOL
+            . '(cracker) Còn ' . $dayLeftToNewYear . ' ngày nữa là tết dương (Comming soon...)' . PHP_EOL
+            . '(cracker) Và ' . $dayLeftToNewYear2 . ' ngày nữa là tết âm lịch (Comming soon...)'
+            . $this->getSalaryMessage()
+            . '[/info]';
+    }
+
+    protected function getSalaryMessage()
+    {
+        $salaryDate = date("Y-m-d", strtotime("last day of this month"));
+        $salaryDay = date('w', strtotime($salaryDate));
+        if ($salaryDay === '0') {
+            $salaryDate =  date('Y-m-d', strtotime('-2 day', strtotime($salaryDate)));
+        } elseif ($salaryDay === '6') {
+            $salaryDate = date('Y-m-d', strtotime('-1 day', strtotime($salaryDate)));
+        }
+
+        $dateDiff = date_diff(date_create(date('Y-m-d')), date_create(date('Y-m-d', strtotime($salaryDate))))
+            ->format('%a');
+        if ($dateDiff <= 7) {
+            return PHP_EOL . PHP_EOL
+                . $dateDiff . ' ngày nữa là có lương về rồi mọi người ơi (100diem)(100diem)(100diem)';
+        }
+        return '';
     }
 }
