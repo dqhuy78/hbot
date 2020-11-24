@@ -73,7 +73,8 @@ class ForecastWeatherDaily extends Command
         $dayLeftToNewYear2 = (int) round((strtotime('2021-02-12') - time()) / (60 * 60 * 24));
         $date = Carbon::today()->format('d/m/Y');
 
-        return '[info][title]Chào buổi sáng![/title]'
+        return '[toall]'
+            . '[info][title]Chào buổi sáng cả nhà![/title]'
             . '(*) Dự báo thời tiết ngày ' . $date . ': Nhiệt độ: ' . $temperature . ' độ C, ' . $des . PHP_EOL . PHP_EOL
             . '(cracker) Còn ' . $dayLeftToNoel . ' ngày nữa là Noel (https://dqhuy78.github.io/countdown/)' . PHP_EOL
             . '(cracker) Còn ' . $dayLeftToNewYear . ' ngày nữa là tết dương (Comming soon...)' . PHP_EOL
